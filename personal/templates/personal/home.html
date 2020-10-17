@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Travelling BLog</h1>
+        <p class="lead">
+            Places I've travelled to, along with their photos and brief description.
+        </p>
+    </div>
+    <div class="container">
+        <div class="d-flex flex-column"><!--creates a flex box -->
+        <h3>Registered users: </h3> <br>
+        {% for list_item in list %}
+            {% include 'personal/snippets/bodysnippets.html' with value=list_item %}
+        {% endfor %}
+        </div>
+        
+    </div>
+
+{%endblock content%}

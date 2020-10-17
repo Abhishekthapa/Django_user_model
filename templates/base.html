@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags for responsive website -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Django_Project</title>
+    {%include 'snippets/header.html' %}
+
+</head>
+<body>
+    <!-- main body -->
+    <style type="text/css">
+        .main{
+            min-height: 100vh;
+            height: 100%;
+        }
+    </style>
+    <div class="main">
+        {%block content%}
+
+        {%endblock content%}
+
+    </div>
+    
+    <!-- end main body -->
+
+
+    {%include 'snippets/footer.html' %}
+</body>
+
+</html>

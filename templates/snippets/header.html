@@ -1,0 +1,55 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+<script src='main.js'></script>
+
+<style type="text/css">
+        @media (min-width: 768px) {
+            html {
+                font-size: 16px;
+            }
+        }
+
+    .container {
+        max-width: 960px;
+    }
+
+    .pricing-header {
+        max-width: 700px;
+    }
+
+    .card-deck .card {
+        min-width: 220px;
+    }
+
+</style>
+<!--header (navigation bar)-->
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
+    <!--to display username if uuser is logged in-->
+    <h5 class="my-0 mr-md-auto text-white font-weight-normal">
+        {% if request.user.is_authenticated %}
+            <p>Hello, {{request.user.username}}  </p>
+        {%endif%}
+    </h5>
+    
+    <nav class="my-2 my-md-0 mr-md-3 ">
+        {% if request.user.is_authenticated %}
+            <p> 
+                <a class="p-2 text-white" href="{% url 'home' %}">Home</a>  
+                <a class="p-2 text-white" href="{%url 'account' %}">Account_info</a> 
+                <a class="p-2 text-white btn btn-outline-primary" href="{% url 'logout' %}">Logout</a> 
+
+            </p>
+    
+        {% else %}
+            <p> 
+                <a class="p-2 text-white" href="{% url 'home' %}">Home</a> 
+                <a class="p-2 text-white btn btn-outline-primary" href="{% url 'login' %}">Login</a>
+                <a class="p-2 text-white btn btn-outline-primary" href="{%url 'register' %}">Register</a> 
+                
+            </p>
+        {%endif%}
+        
+    </nav>
+</div>
+<!--end header navigation bar-->
