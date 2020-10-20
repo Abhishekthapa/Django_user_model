@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-
+<!--to load image files-->
+{%load static %}
 
 {% block content %}
 
@@ -33,10 +34,17 @@
     .h3{
 		text-align: center;
 	}
+    .blog_posts{
+        max-width: 500px;
+        width: 100%;
+        margin: auto;
+    }
 </style>
 
 <form class="form-signin" method="post">{% csrf_token %}
-    
+    <div class="d-flex flex-column pb-3">
+        <img class="img=fluid mx-auto d-block"src="{%static 'canibalminion.jpg' %}" alt="cannibal minion" width="51px" height="72px">
+    </div>
     <h1 class="h3 mb-3 font-weight-normal">AccountInfo</h1>
     
     <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
@@ -56,15 +64,37 @@
             <p>{{account_form.non_field_errors}}</p>
         </div>
     {% endif %}
+
     {%if success_message %}
         <p style="color: green; text-align: center;">{{success_message}}</p>   
     {%endif%}
     
     <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
     </form>
+
     <div class="d-flex flex-column">
         <a  class="m-auto" href="{% url 'password_change' %}">Change Password</a>
     
+    </div>
+
+    <div class="container mt-4 p-4">
+        <div class="row">
+            <div class="blog_posts ">
+                <h3 class="mb-3 font-weight-normal h3" >Your Blog Posts:</h3>
+                {% if blog_posts %}
+                <ul>
+                    {% for post in blog_posts %}
+                    <a href="{% url 'blog:detail' post.slug %}" style="text-decoration: none;"> 
+                        <li class=' list-group-item '>{{post}}</li>
+                    </a>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <p>you have no blog posts. Create a post <a href="{% url 'blog:create' %}">here</a></p>
+                {% endif %}   
+
+            </div>
+        </div>
     </div>
 
 {% endblock content %}

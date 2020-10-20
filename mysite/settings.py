@@ -26,7 +26,7 @@ SECRET_KEY = 'cl4&p&l0h1s#=s_90tkxf1=)=159v(d9yer@zix9=alt(8tz@@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cdb32ae42d87.ngrok.io', 'localhost', ]
 
 if DEBUG:
     # during develoment only
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # my apps
     'personal',
     'account',
+    'blog',
 
 
     # django apps
@@ -81,7 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
-# for creating own user db line 81
+# for creating own user
 AUTH_USER_MODEL = 'account.Account'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -129,5 +130,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'media'),
+]
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+# cdn--> content delivery network
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')

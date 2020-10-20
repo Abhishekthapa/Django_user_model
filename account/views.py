@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForn
 import time
+from blog.models import BlogPost
 
 
 def registration_view(request):
@@ -80,5 +81,12 @@ def account_view(request):
             }
         )
     context['account_form'] = form
+    # to show blog posted by user in their account info section
+    blog_posts = BlogPost.objects.filter(author=request.user)
+    context['blog_posts'] = blog_posts
 
     return render(request, 'account/account.html', context)
+
+
+def must_authenticate(request):
+    return render(request, 'account/must_authenticate.html', {})
