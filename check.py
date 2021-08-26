@@ -114,4 +114,4 @@ if __name__ == '__main__':
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
     # origin = repository.remote("origin")
     # origin.push()
-    subprocess.call(f'git push -u origin {"usermodelframeworkbranch"}')
+    subprocess.call(f'git push -u origin')
