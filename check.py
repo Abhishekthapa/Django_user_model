@@ -64,16 +64,16 @@ if __name__ == '__main__':
     origin.pull()
 
     # change the file input to ../src/main/resources/pa_engine_version.properties
-    change_version_for_pa_engine_properties("../checktest", "engineVersion=", engineVersion)
+    change_version_for_pa_engine_properties("checktest", "engineVersion=", engineVersion)
     # change the file input to ../src/main/resources/pa_engine_version.properties
     if stageVersion:
-        change_version_for_pa_engine_properties("../checktest", "stageVersion=",
+        change_version_for_pa_engine_properties("checktest", "stageVersion=",
                                                 stageVersion)
 
     # update engine version in pom.xml
 
     # change file location to "../pom.xml"
-    with fileinput.FileInput("../checktest", inplace=True) as file:
+    with fileinput.FileInput("checktest", inplace=True) as file:
         version = 0
         for line in file:
             if "<version>" in line:
@@ -85,7 +85,7 @@ if __name__ == '__main__':
         print("version changed to: ", engineVersion, " in pom.xml")
 
     # change jarversion for bash and python scripts.
-    change_JARversion_for_pyfiles("../checktest", "DasCascading-", engineVersion)
+    change_JARversion_for_pyfiles("checktest", "DasCascading-", engineVersion)
 
     # # update processing scripts
     # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/production_cascading.py", "DasCascading-", engineVersion)
@@ -106,4 +106,5 @@ if __name__ == '__main__':
     # # # update historicalToPxEmr.sh
     # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/historicalToPxEmr.sh", "DasCascading-", engineVersion)
 
-    repository.git.add("../checktest")
+    repository.git.add("./check.py","./checktest")
+    repository.git.commit('-m', 'Changed engine and master table versions and processing scripts for Engine Release V' + engineVersion)
