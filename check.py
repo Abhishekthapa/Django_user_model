@@ -112,5 +112,5 @@ if __name__ == '__main__':
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
-    origin = repository.create_remote('origin',"https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git")
+    origin = repository.remote();
     origin.push()
