@@ -113,7 +113,6 @@ if __name__ == '__main__':
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
-    repository.git.checkout("master")
     origin.push()
     # create git release branch
     new_branch = "V_" +engineVersion+ "_engine"
