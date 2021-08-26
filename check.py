@@ -108,4 +108,5 @@ if __name__ == '__main__':
 
     repository.git.add("./check.py","./checktest")
     repository.git.commit('-m', 'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
+    origin = repository.remote(name='origin')
     origin.push()
