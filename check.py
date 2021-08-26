@@ -1,6 +1,15 @@
 import fileinput
 import git
-from git import repo
+
+
+def git_push():
+    try:
+        repository = git.Repo('/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model')
+        repository.git.checkout('usermodelframeworkbranch')
+        origin = repository.remote(name='origin')
+        origin.push()
+    except:
+        print('Some error occured while pushing the code')
 
 
 def change_version_for_pa_engine_properties(filepath, field_to_replace_split, value):
@@ -109,4 +118,4 @@ if __name__ == '__main__':
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
-    repo.git.push("origin", "usermodelframeworkbranch")
+    git_push()
