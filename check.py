@@ -1,5 +1,6 @@
 import fileinput
 import git
+import subprocess
 
 
 def git_push():
@@ -118,4 +119,5 @@ if __name__ == '__main__':
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
-    git_push()
+  #  git_push()
+    subprocess.run(["git", "push"])
