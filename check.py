@@ -5,7 +5,7 @@ import subprocess
 
 def git_push():
     try:
-        repository = git.Repo('/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model')
+        repository = git.Repo('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git')
         repository.git.checkout('usermodelframeworkbranch')
         origin = repository.remote(name='origin')
         origin.push()
@@ -119,5 +119,5 @@ if __name__ == '__main__':
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
-  #  git_push()
-    subprocess.run(["git", "push"])
+    git_push()
+    #subprocess.run(["git", "push"])
