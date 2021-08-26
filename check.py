@@ -2,6 +2,7 @@ import fileinput
 import git
 import subprocess
 
+
 def change_version_for_pa_engine_properties(filepath, field_to_replace_split, value):
     version = 0
     with fileinput.FileInput(filepath, inplace=True) as file:
@@ -25,6 +26,7 @@ def change_JARversion_for_pyfiles(filepath, field_to_replace_split, value):
             else:
                 print(line, end="")
     print(field_to_replace_split + version + " has been changed to: " + value)
+
 
 def change_version(value):
     # change the file input to ../src/main/resources/pa_engine_version.properties
@@ -64,7 +66,6 @@ def change_version(value):
     # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/historicalToPxEmr.sh", "DasCascading-", value)
 
 
-
 if __name__ == '__main__':
     print("---------------------")
     print("ENGINE RELEASE SCRIPT")
@@ -100,47 +101,11 @@ if __name__ == '__main__':
     origin = repository.remote(name='origin')
     origin.pull()
 
-
     # change the file input to ../src/main/resources/pa_engine_version.properties
     if stageVersion:
         change_version_for_pa_engine_properties("checktest", "stageVersion=",
                                                 stageVersion)
     change_version(engineVersion)
-    # # update engine version in pom.xml
-    #
-    # # change file location to "../pom.xml"
-    # with fileinput.FileInput("checktest", inplace=True) as file:
-    #     version = 0
-    #     for line in file:
-    #         if "<version>" in line:
-    #             version = line.split("<version>")[1]
-    #             print(line.replace(version, engineVersion + "</version>"), end='\n')
-    #         else:
-    #             print(line, end="")
-    #
-    #     print("version changed to: ", engineVersion, " in pom.xml")
-    #
-    # # change jarversion for bash and python scripts.
-    # change_JARversion_for_pyfiles("checktest", "DasCascading-", engineVersion)
-    #
-    # # # update processing scripts
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/production_cascading.py", "DasCascading-", engineVersion)
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/emr_production_cascading.py", "DasCascading-", engineVersion)
-    # #
-    # # # # update parallel processing script
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/parallel_emr_production_cascading.py", "DasCascading-", engineVersion)
-    # #
-    # # # # update real time migration script
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/realTime_migration.py", "DasCascading-", engineVersion)
-    # #
-    # # # # update masterTables.sh
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/masterTables.sh", "DasCascading-", engineVersion)
-    # #
-    # # # # update historicalToPx.sh
-    # # change_JARversion_for_pyfiles("historicalToPx.sh", "DasCascading-", engineVersion)
-    # #
-    # # # # update historicalToPxEmr.sh
-    # # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/historicalToPxEmr.sh", "DasCascading-", engineVersion)
 
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
@@ -148,7 +113,7 @@ if __name__ == '__main__':
 
     origin.push()
     # create git release branch
-    new_branch = "V_" +engineVersion+ "_engine"
+    new_branch = "V_" + engineVersion + "_engine"
     print(new_branch)
     repository.git.checkout("-b", new_branch)
     origin.push(new_branch)
@@ -160,51 +125,10 @@ if __name__ == '__main__':
     if not (nextRelease):
         exit("nextRelease is required!")
 
-    change_version_for_pa_engine_properties("checktest", "engineVersion=", nextRelease)
-    # change the file input to ../src/main/resources/pa_engine_version.properties
-    if stageVersion:
-        change_version_for_pa_engine_properties("checktest", "stageVersion=",
-                                                stageVersion)
-
-    # update engine version in pom.xml
-
-    # change file location to "../pom.xml"
-    with fileinput.FileInput("checktest", inplace=True) as file:
-        version = 0
-        for line in file:
-            if "<version>" in line:
-                version = line.split("<version>")[1]
-                print(line.replace(version, nextRelease + "</version>"), end='\n')
-            else:
-                print(line, end="")
-
-        print("version changed to: ", nextRelease, " in pom.xml")
-
-    # change jarversion for bash and python scripts.
-    change_JARversion_for_pyfiles("checktest", "DasCascading-", nextRelease)
-
-    # # update processing scripts
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/production_cascading.py", "DasCascading-", nextRelease)
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/emr_production_cascading.py", "DasCascading-", nextRelease)
-    #
-    # # # update parallel processing script
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/parallel_emr_production_cascading.py", "DasCascading-", nextRelease)
-    #
-    # # # update real time migration script
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/jobs/realTime_migration.py", "DasCascading-", nextRelease)
-    #
-    # # # update masterTables.sh
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/masterTables.sh", "DasCascading-", nextRelease)
-    #
-    # # # update historicalToPx.sh
-    # change_JARversion_for_pyfiles("historicalToPx.sh", "DasCascading-", nextRelease)
-    #
-    # # # update historicalToPxEmr.sh
-    # change_JARversion_for_pyfiles("../src/main/resources/dasProduction/bin/historicalToPxEmr.sh", "DasCascading-", nextRelease)
+    change_version(nextRelease)
 
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed pom, properties and productions scripts for develop with Version: ' + nextRelease)
 
     origin.push()
-
