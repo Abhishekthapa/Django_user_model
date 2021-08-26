@@ -1,14 +1,16 @@
 import fileinput
 import git
 import subprocess
+from git import Repo
 
 
 def git_push():
     try:
-        repository = git.Repo('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git')
-        repository.git.checkout('usermodelframeworkbranch')
-        origin = repository.remote(name='origin')
-        origin.push()
+       # subprocess.run(["git","push"])
+        # repository = git.Repo('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git')
+        localRepoPath= "/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model"
+        r = Repo.clone_from('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git', localRepoPath)
+        r.remotes.origin.push()
     except:
         print('Some error occured while pushing the code')
 
