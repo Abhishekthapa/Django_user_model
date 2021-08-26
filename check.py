@@ -4,15 +4,6 @@ import subprocess
 from git import Repo
 
 
-def git_push():
-    try:
-       # subprocess.run(["git","push"])
-        # repository = git.Repo('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git')
-        localRepoPath= "/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model"
-        r = Repo.clone_from('https://github.com/Abhishekthapa/SimpleWebsite-with-Django_user_model.git', localRepoPath)
-        r.remotes.origin.push()
-    except:
-        print('Some error occured while pushing the code')
 
 
 def change_version_for_pa_engine_properties(filepath, field_to_replace_split, value):
@@ -121,5 +112,5 @@ if __name__ == '__main__':
     repository.git.add("./check.py", "./checktest")
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
-    git_push()
-    #subprocess.run(["git", "push"])
+    origin = repository.remote(name='origin')
+    origin.push()
