@@ -113,5 +113,6 @@ if __name__ == '__main__':
     repository.git.commit('-m',
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
-    origin.push()
+    g = git.cmd.Git('/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model')
+    g.push()
    # subprocess.call(f'git push -u origin')
