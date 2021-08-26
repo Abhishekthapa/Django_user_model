@@ -120,4 +120,6 @@ if __name__ == '__main__':
     repository.git.checkout("-b", new_branch)
     origin.push(new_branch)
 
-
+    # change to dev version
+    repository.git.checkout('usermodelframeworkbranch')
+    
