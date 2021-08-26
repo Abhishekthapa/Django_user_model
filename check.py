@@ -114,4 +114,5 @@ if __name__ == '__main__':
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
     origin.push()
-
+    new_branch = "V_" +engineVersion+ "_engine"
+    print(new_branch)
