@@ -61,7 +61,7 @@ if __name__ == '__main__':
     # origin = repository.remote(name='origin')
     # origin.pull()
 
-    repository = git.Repo('/home/Abhishek.Thapa/Desktop/SimpleWebsite-with-Django_user_model')
+    repository = git.Repo('/home/Abhishek.Thapa/SimpleWebsite-with-Django_user_model')
     repository.git.checkout('usermodelframeworkbranch')
     origin = repository.remote(name='origin')
     origin.pull()
@@ -114,10 +114,10 @@ if __name__ == '__main__':
                           'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
     repository.git.checkout("master")
-    origin.push("usermodelframeworkbranch")
+    origin.push()
     # create git release branch
     new_branch = "V_" +engineVersion+ "_engine"
     print(new_branch)
-    repository.git.checkout(new_branch)
+    repository.git.checkout("-b",new_branch)
 
 
