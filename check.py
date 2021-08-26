@@ -117,7 +117,7 @@ if __name__ == '__main__':
     # create git release branch
     new_branch = "V_" +engineVersion+ "_engine"
     print(new_branch)
-    repository.git.checkout("-b",new_branch)
+    repository.git.checkout("-b", new_branch)
     origin.push()
 
 
