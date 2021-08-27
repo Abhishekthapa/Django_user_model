@@ -1,9 +1,9 @@
-engineVersion=1
-stageVersion=3
+engineVersion=11.6.0
+stageVersion=5.0.0
 asd
 asdasdad
 <packaging>jar</packaging>
-<version>1</version>
+<version>11.6.0</version>
 asdaasd
-JAR = "target/DasCascading-1.jar"
+JAR = "target/DasCascading-11.6.0.jar"
 dasasa
