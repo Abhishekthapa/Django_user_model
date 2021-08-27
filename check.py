@@ -16,7 +16,7 @@ def change_version_for_pa_engine_properties(filepath, field_to_replace_split, va
 
 def change_JARversion_for_pyfiles(filepath, field_to_replace_split, value):
     version = 0
-    with fileinput.FileInput(filepath, inplace=True, backup=".bak") as file:
+    with fileinput.FileInput(filepath, inplace=True) as file:
         for line in file:
             if field_to_replace_split in line:
                 version = line.split(field_to_replace_split)[1]
@@ -102,8 +102,7 @@ if __name__ == '__main__':
 
     # change the file input to ../src/main/resources/pa_engine_version.properties
     if stageVersion:
-        change_version_for_pa_engine_properties("checktest", "stageVersion=",
-                                                stageVersion)
+        change_version_for_pa_engine_properties("checktest", "stageVersion=", stageVersion)
     change_version(engineVersion)
 
     repository.git.add("./check.py", "./checktest")
