@@ -106,8 +106,7 @@ if __name__ == '__main__':
     change_version(engineVersion)
 
     repository.git.add("./check.py", "./checktest")
-    repository.git.commit('-m',
-                          'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
+    repository.git.commit('-m','Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
     origin.push()
     # create git release branch
