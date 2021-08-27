@@ -4,7 +4,7 @@ import git
 
 def change_version_for_pa_engine_properties(filepath, field_to_replace_split, value):
     version = 0
-    with fileinput.FileInput(filepath, inplace=False) as file:
+    with fileinput.FileInput(filepath, inplace=True) as file:
         for line in file:
             if field_to_replace_split in line:
                 version = line.split(field_to_replace_split)[1]
@@ -16,7 +16,7 @@ def change_version_for_pa_engine_properties(filepath, field_to_replace_split, va
 
 def change_JARversion_for_pyfiles(filepath, field_to_replace_split, value):
     version = 0
-    with fileinput.FileInput(filepath, inplace=False) as file:
+    with fileinput.FileInput(filepath, inplace=True) as file:
         for line in file:
             if field_to_replace_split in line:
                 version = line.split(field_to_replace_split)[1]
@@ -31,7 +31,7 @@ def change_version(value):
     # change the file input to ../src/main/resources/pa_engine_version.properties
     change_version_for_pa_engine_properties("checktest", "engineVersion=", value)
     # change file location to "../pom.xml"
-    with fileinput.FileInput("checktest", inplace=False) as file:
+    with fileinput.FileInput("checktest", inplace=True) as file:
         version = 0
         for line in file:
             if "<version>" in line:
@@ -106,7 +106,8 @@ if __name__ == '__main__':
     change_version(engineVersion)
 
     repository.git.add("./check.py", "./checktest")
-    repository.git.commit('-m','Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
+    repository.git.commit('-m',
+                          'Changed engine and master table versions and processing scripts for Engine Release V ' + engineVersion)
 
     origin.push()
     # create git release branch
