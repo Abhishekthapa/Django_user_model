@@ -1,6 +1,5 @@
 import fileinput
 import git
-import subprocess
 
 
 def change_version_for_pa_engine_properties(filepath, field_to_replace_split, value):
@@ -17,7 +16,7 @@ def change_version_for_pa_engine_properties(filepath, field_to_replace_split, va
 
 def change_JARversion_for_pyfiles(filepath, field_to_replace_split, value):
     version = 0
-    with fileinput.FileInput(filepath, inplace=True) as file:
+    with fileinput.FileInput(filepath, inplace=True, backup=".bak") as file:
         for line in file:
             if field_to_replace_split in line:
                 version = line.split(field_to_replace_split)[1]
@@ -114,7 +113,7 @@ if __name__ == '__main__':
     origin.push()
     # create git release branch
     new_branch = "V_" + engineVersion + "_engine"
-    print(new_branch)
+    print("new branch created: " + new_branch)
     repository.git.checkout("-b", new_branch)
     origin.push(new_branch)
 
